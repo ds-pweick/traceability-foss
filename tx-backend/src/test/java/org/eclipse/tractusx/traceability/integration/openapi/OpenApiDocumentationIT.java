@@ -21,6 +21,7 @@ package org.eclipse.tractusx.traceability.integration.openapi;
 
 import org.eclipse.tractusx.traceability.integration.IntegrationTestSpecification;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,13 +31,14 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.apache.commons.io.FileUtils.writeStringToFile;
 
+@EnabledIf(expression = "${openapi-doc.generate}", loadContext = true)
 class OpenApiDocumentationIT extends IntegrationTestSpecification {
 
     private static final List<String> API_DOCUMENTATION_LOCATIONS = List.of("./openapi/traceability-foss-backend.json",
             "../docs/api/traceability-foss-backend.json");
 
     @Test
-    void shouldGenerateOpenapiDocumentation() {
+    void shouldGenerateOpenApiDoc() {
         // when
         var response = given()
                 .when()
@@ -53,6 +55,5 @@ class OpenApiDocumentationIT extends IntegrationTestSpecification {
                 throw new RuntimeException(e);
             }
         });
-        ;
     }
 }
