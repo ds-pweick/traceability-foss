@@ -1,0 +1,2710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.18">
+<title>Architecture documentation (arc42)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>Architecture documentation (arc42)</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_notice">Notice</a></li>
+<li><a href="#_introduction_and_goals">Introduction and goals</a>
+<ul class="sectlevel2">
+<li><a href="#_requirements_overview">Requirements overview</a></li>
+<li><a href="#_quality_goals">Quality goals</a></li>
+<li><a href="#_stakeholder">Stakeholder</a></li>
+</ul>
+</li>
+<li><a href="#_architecture_constraints">Architecture constraints</a>
+<ul class="sectlevel2">
+<li><a href="#_technical_constraints">Technical constraints</a></li>
+<li><a href="#_organizational_constraints">Organizational constraints</a></li>
+<li><a href="#_political_constraints">Political constraints</a></li>
+<li><a href="#_development_conventions">Development conventions</a></li>
+</ul>
+</li>
+<li><a href="#_system_scope_and_context">System scope and context</a>
+<ul class="sectlevel2">
+<li><a href="#_business_context">Business context</a></li>
+<li><a href="#_technical_context">Technical context</a></li>
+</ul>
+</li>
+<li><a href="#_solution_strategy">Solution strategy</a>
+<ul class="sectlevel2">
+<li><a href="#_introduction">Introduction</a></li>
+<li><a href="#_technology">Technology</a></li>
+<li><a href="#_structure">Structure</a></li>
+</ul>
+</li>
+<li><a href="#_building_block_view">Building block view</a>
+<ul class="sectlevel2">
+<li><a href="#_blackbox_overall_system">Blackbox overall system</a></li>
+<li><a href="#_level_1">Level 1</a></li>
+</ul>
+</li>
+<li><a href="#_runtime_view">Runtime view</a>
+<ul class="sectlevel2">
+<li><a href="#_assets">Assets</a></li>
+<li><a href="#_notifications">Notifications</a></li>
+<li><a href="#_data_consumption">Data consumption</a></li>
+<li><a href="#_data_provisioning">Data Provisioning</a></li>
+<li><a href="#_data_sovereignty">Data sovereignty</a></li>
+<li><a href="#_policies">Policies</a></li>
+<li><a href="#_scheduler">Scheduler</a></li>
+</ul>
+</li>
+<li><a href="#_deployment_view">Deployment view</a></li>
+<li><a href="#_cross_cutting_concepts">Cross-cutting concepts</a>
+<ul class="sectlevel2">
+<li><a href="#_entity_relationship_model">Entity-relationship model</a></li>
+<li><a href="#_domain_concepts">Domain concepts</a></li>
+<li><a href="#_safety_and_security_concepts">Safety and security concepts</a></li>
+<li><a href="#_architecture_and_design_patterns">Architecture and design patterns</a></li>
+<li><a href="#_under_the_hood_concepts">"Under-the-hood" concepts</a></li>
+<li><a href="#_development_concepts">Development concepts</a></li>
+<li><a href="#_operational_concepts">Operational concepts</a></li>
+<li><a href="#_user_experience">User experience</a></li>
+</ul>
+</li>
+<li><a href="#_quality_requirements">Quality requirements</a>
+<ul class="sectlevel2">
+<li><a href="#_quality_tree">Quality tree</a></li>
+<li><a href="#_quality_scenarios">Quality scenarios</a></li>
+</ul>
+</li>
+<li><a href="#_glossary">Glossary</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_notice">Notice</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This work is licensed under the [Apache-2.0](<a href="https://www.apache.org/licenses/LICENSE-2.0" class="bare">https://www.apache.org/licenses/LICENSE-2.0</a>).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>SPDX-License-Identifier: Apache-2.0</p>
+</li>
+<li>
+<p>Licence Path: <a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="bare">https://creativecommons.org/licenses/by/4.0/legalcode</a></p>
+</li>
+<li>
+<p>Copyright (c) 2021,2022,2023 Contributors to the Eclipse Foundation</p>
+</li>
+<li>
+<p>Copyright (c) 2022, 2023 ZF Friedrichshafen AG</p>
+</li>
+<li>
+<p>Copyright (c) 2022 ISTOS GmbH</p>
+</li>
+<li>
+<p>Copyright (c) 2022, 2023 Bayerische Motoren Werke Aktiengesellschaft (BMW AG)</p>
+</li>
+<li>
+<p>Copyright (c) 2022,2023 BOSCH AG</p>
+</li>
+<li>
+<p>Source URL: <a href="https://github.com/eclipse-tractusx/traceability-foss" class="bare">https://github.com/eclipse-tractusx/traceability-foss</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction_and_goals">Introduction and goals</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This chapter gives you an overview about the goals of the service,
+in which context the service runs and which stakeholders are involved.</p>
+</div>
+<div class="sect2">
+<h3 id="_requirements_overview">Requirements overview</h3>
+<div class="sect3">
+<h4 id="_what_is_the_purpose_of_the_trace_x_application">What is the purpose of the Trace-X application</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Empower all companies from SMEs to large OEMs to participate in parts traceability with an open-source solution to easily take part in the Catena-X traceability use case.</p>
+</li>
+<li>
+<p>It is a standalone application which can be self-hosted.</p>
+</li>
+<li>
+<p>Display the relations of the automotive value chain based on a standardized IT model.</p>
+</li>
+<li>
+<p>Overview and transparency across the supplier network enable faster intervention based on recorded events in the supply chain.</p>
+</li>
+<li>
+<p>Notifications/Messages regarding quality-related incidents and a tool for inspecting the supply chain.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_essential_features">Essential features</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>List, view and publish manufactured parts based on BoM AsBuild</p>
+</li>
+<li>
+<p>List, view and publish planned parts based on BoM AsPlanned</p>
+</li>
+<li>
+<p>Filter and search functionality on part views</p>
+</li>
+<li>
+<p>Show detailed information on manufactured parts from AAS description assets and aspects</p>
+</li>
+<li>
+<p>Uses submodels SerialPart, AssemblyPartRelationship and Batch</p>
+</li>
+<li>
+<p>List and view supplier parts (AssemblyPartRelationship) based on BoM AsBuild lifecycle</p>
+</li>
+<li>
+<p>View parts and parts relations in a visualized parts tree</p>
+</li>
+<li>
+<p>Send and receive top-down notifications (quality investigations) along the supply chain</p>
+</li>
+<li>
+<p>Compliance with Catena-X guidelines</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_quality_goals">Quality goals</h3>
+<div class="paragraph">
+<p>The following table entries define overall Trace-X quality goals. The order of topics does not imply a priority of the quality goals.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Quality goal</th>
+<th class="tableblock halign-left valign-top">Motivation and description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Running reference application for Catena-X traceability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consume traceability data, visualize it in a state-of-the-art frontend to the user and enable the exchange of notifications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accessible and easy to use</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable SMEs to large enterprises.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cloud agnostic solution</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trace-X is built as a reference architecture and able to be run on different cloud solutions. It uses Helm, i.e. Helm charts, so that it can easily be deployed on different systems.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trustworthy application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trace-X uses the Catena-X standards as a basis to fulfill the interoperability (with commercial as well as other solutions) and data sovereignty requirements.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application reliability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Trace-X architecture is set up so that provided part tree structures are consumed, aggregated and utilized to enable quality related actions such as notifications along the supply chain on which the costumers can rely.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usability and user experience</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trace-X is aligned with the overarching UUX guidelines. This ensures ease of use for the user as well as a good user experience.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Static Application Security Testing (SAST) and Dynamic Application Security Testing (DAST) are executed automatically and regularly. Findings are recorded and mitigated.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_stakeholder">Stakeholder</h3>
+<div class="paragraph">
+<p>The following table presents the stakeholders of Trace-X and their respective intentions.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Who</th>
+<th class="tableblock halign-left valign-top">Matters and concern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Software developer</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Make an impact on Catena-X by participating in open-source software.</p>
+</li>
+<li>
+<p>Example implementation for own use cases and applications.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Operating environments</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Use Trace-X as a basis for industrialization.</p>
+</li>
+<li>
+<p>Example implementation for own business applications, further features and fast ramp up.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Catena-X partners</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Take part in traceability use case.</p>
+</li>
+<li>
+<p>See relationships in the value chain.</p>
+</li>
+<li>
+<p>React on quality issues with standardized actions and notifications.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Larger OEMs / tiers</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Want to use this implementation for further development and integration into their system landscape.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SMEs</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Need a solution to view data provided into the Catena-X network.</p>
+</li>
+<li>
+<p>Act in a standardized way with partners within CX.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_architecture_constraints">Architecture constraints</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_technical_constraints">Technical constraints</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interoperability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trace-X must use the EDC together with Catena-X approved data models to guarantee interoperability between participants.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data sovereignty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data owners and data consumers have to use usage policies for offering, consuming and therefore transferring data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kubernetes for container orchestration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Catena-X requires the application to run in a Kubernetes environment, deployed via Helm charts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Catena-X UUX guidance (CX style guide)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The frontend of Trace-X follows Catena-X-wide UUX consistency according to the CX style guide.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_organizational_constraints">Organizational constraints</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start of development in July 2022. Further development in alignment with the foundation of the Catena-X Automotive Network e.V. requirements and timeline.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Process model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Iterative and incremental. The SAFe framework is used to align with Catena-X services, prerequisites, components and requirements to be Catena-X compatible.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Catena-X services / requirements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trace-X needs to be Catena-X compliant and the application has to follow the CX standards as well as interact with the core services and components.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Release as open source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The source code - at least partially - is made available as open source and can be found in Github Catena-X ng as well as in Eclipse Tractus-X.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Technology Readiness Level (TRL) for products developed within the CX consortia</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">As Trace-X is a reference implementation, the Technology Readiness Level (TRL) must not be above TRL 8.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_political_constraints">Political constraints</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FOSS licenses approved by the Eclipse foundation have to be used.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_development_conventions">Development conventions</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Architecture documentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Architectural documentation of Trace-X reference application in arc42-template terminology and structure.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Language</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The project language is English to ensure the best possible accessibility for all participants. Therefore, classes, methods etc. are named in English and the documentation is written in English.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test coverage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">More than 80% of the complete source code has to be test covered.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_system_scope_and_context">System scope and context</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Trace-X is an end-user application to visualize and utilize data provided to the Catena-X network. This includes the traceability of manufactured parts and batches as well as the shipped and supplied components. To utilize the CX open ecosystem it is necessary to exchange information on serialized parts and batches with supply chain partners in a standardized, data-sovereign and interoperable way. This section describes the environment of Trace-X, its intended users and which systems and components it interacts with.</p>
+</div>
+<div class="sect2">
+<h3 id="_business_context">Business context</h3>
+<div class="paragraph">
+<p>Trace-X exchanges data with any other traceability applications within the CX ecosystem. This is implemented by integrating the service into the CX network and the usage of required central components and services provided by CX.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/business-context.svg" alt="business context" width="476" height="450">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_user">User</h4>
+<div class="paragraph">
+<p>Trace-X can be deployed, hosted and run by every party that is part of the Catena-X network. They need to be registered, have a BPN and a technical user as well as provide valid credentials. An end-user in Trace-X can have roles provided by the CX portal (user, supervisor, admin).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_irs">IRS</h4>
+<div class="paragraph">
+<p>The Item Relationship Service is the component that is used by Trace-X to fetch data chains from Catena-X network. Data that is provided by IRS gets extracted, aggregated, transformed and is used for further actions in Trace-X. Further information can be found in the <a href="https://eclipse-tractusx.github.io/item-relationship-service/docs/arc42/">IRS architecture documentation (arc42)</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_catena_x_network">Catena-X network</h4>
+<div class="paragraph">
+<p>Trace-X and IRS are retrieving necessary information and data from the Catena-X network (users, digital twins, aspects, submodels, business partner information). If CX services are unavailable, Trace-X will not be able to perform most of its work.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_any_other_traceability_app">Any other traceability app</h4>
+<div class="paragraph">
+<p>Trace-X interacts with any other traceability app using the CX standards. This enables sovereign data exchange as well as receiving and sending notifications to interact between different parties.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_technical_context">Technical context</h3>
+<div class="sect3">
+<h4 id="_component_overview">Component overview</h4>
+<div class="sect4">
+<h5 id="_trace_x_api">Trace-X API</h5>
+<div class="paragraph">
+<p>We provide a REST API that is consumed by Trace-X frontend in order to deliver Trace-X related features such as quality investigations or asset chain visibility.
+Since the Trace-X component is the very last component in the Catena-X ecosystem we are mostly dependent on the other services and theirs APIs in other to deliver desired functionalities. The development of the services is not a part of the Trace-X application and each of the system that we utilize exposes a REST API that we consume and interact with directly.</p>
+</div>
+<div class="paragraph">
+<p>Trace-X is a Spring Boot based application and is secured with the OpenID connector provider Keycloak and the OAuth2. This means for the companies, that utilize Trace-X component, it is required to obtain a technical user in order to be authorized to get access to the external components within Catena-X ecosystem.</p>
+</div>
+<div class="paragraph">
+<p>In order to use the Trace-X frontend with the Trace-X backend, users need to authenticate themselves in order to be authorized to get access to the Trace-X.
+In the frontend UI users provide valid credentials and the system generates a bearer token that it gets from Keycloak and attaches it to the HTTP header parameter Authorization.
+Once a user is authorized and has a proper role in the Trace-X backend, the backend delegates HTTP calls to specific services on their behalf as technical user in order to fulfill specific functionalities.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_outdated_registry_api">[Outdated] Registry API</h5>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/technical-context-registry.svg" alt="technical context registry" width="747" height="586">
+</div>
+</div>
+<div class="paragraph">
+<p>The Trace-X acts as a consumer of the asset administration shell registry component. Trace-X contains a restful client (REST template) that builds a REST call to the mentioned digital twin registry API based on its known URL (the AAS registry URL is configurable in Trace-X).
+Requests contain "assetIds" provided by the component during asset synchronization. Like described in the above section, the security aspect is required in order to achieve a REST call against the AAS Registry. As a response, Trace-X gets the corresponding shells and shell descriptors utilized later for asset synchronization.
+The HTTP(s) transport protocol is used for the REST call communication.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_irs_api">IRS API</h5>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/technical-context-irs.svg" alt="technical context irs" width="803" height="377">
+</div>
+</div>
+<div class="paragraph">
+<p>Trace-X acts as a consumer of the IRS component. Trace-X contains a restful client (REST template) that build a REST call to the mentioned IRS API based on its known URL (the IRS URL is configurable in Trace-X).
+The request contains details required to start an IRS fetch job provided by the component during asset synchronization. Like described in the above section, the security aspect is required in order to achieve a REST call against the IRS. As a response, Trace-X gets the created job id and periodically pulls for the job details that contains assets that will be uploaded to the system.
+As mentioned above, the transport protocol HTTP(S) is used for the REST call communication.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_outdated_portal_api">[Outdated] Portal API</h5>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/technical-context-portal.svg" alt="technical context portal" width="772" height="357">
+</div>
+</div>
+<div class="paragraph">
+<p>Trace-X acts as a consumer of the portal component.
+Trace-X contains a restful client (REST template) that builds a REST call to the mentioned Portal API based on its known URL (the Portal URL is configurable in Trace-X).
+The portal is used to authenticate users and requests against the backend.
+As mentioned above, the transport protocol HTTP(S) is used for the REST call communication.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_outdated_edc_api">[Outdated] EDC API</h5>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/technical-context-edc.svg" alt="technical context edc" width="816" height="142">
+</div>
+</div>
+<div class="paragraph">
+<p>The Trace-X acts as a consumer and provider of the EDC component.
+In Trace-X we communicate with EDC directly only for the sake of fulfilling quality investigation functionality.
+Specific use cases can be viewed in <a href="../runtime-view/index.html">Runtime view</a> section.
+For these purposes the integrated EDC clients in Trace-X are responsible for creating restful requests to the EDC component.
+As mentioned above, the transport protocol HTTP(S) is used for the REST call communication.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_solution_strategy">Solution strategy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section contains summarized architectural overview. A comparison of the most important goals and the corresponding solution approaches.</p>
+</div>
+<div class="sect2">
+<h3 id="_introduction">Introduction</h3>
+<div class="paragraph">
+<p>Following table describes the quality goals of Trace-X (see chapter quality goals) and their matching solution approaches.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Quality goal</th>
+<th class="tableblock halign-left valign-top">Matching approaches in the solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Running reference application for Catena-X traceability</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Published open-source, Trace-X application can be used as a reference by anyone.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Accessible and easy to use</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Established programming languages are used.</p>
+</li>
+<li>
+<p>Backend written in Java.</p>
+</li>
+<li>
+<p>Frontend written in Typescript based on the Angular framework.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cloud agnostic solution</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Helm charts to support the deployment of the application in a Kubernetes environment.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application reliability</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Data source is the Catena-X network. Data is fetched with IRS directly from the data owner and the digital twin registry of CX.</p>
+</li>
+<li>
+<p>Trace-X can be hosted decentralized since it is an open-source reference implementation.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Static Application Security Testing (SAST) and Dynamic Application Security Testing (DAST) are executed automatically and regularly with tools as part of the pipeline.</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_technology">Technology</h3>
+<div class="paragraph">
+<p>Trace-X is developed using Java and the Spring Boot framework for the backend and Typescript based on the Angular framework for the frontend. This decision was taken due to the support of the frameworks as well as technical knowledge of the team members.</p>
+</div>
+<div class="paragraph">
+<p>The application can be hosted using Docker and Kubernetes. This is commonly used and widespread. With this the application has no vendor lock in regarding the hosting provider.</p>
+</div>
+<div class="paragraph">
+<p>The communication between frontend and backend is done using REST APIs. This is the standard method in the Catena-X landscape and makes the application components easy to use for any third party client.</p>
+</div>
+<div class="paragraph">
+<p>For the database PostgreSQL is used.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_structure">Structure</h3>
+<div class="paragraph">
+<p>Trace-X is divided into two components: frontend and backend.
+It roughly can be broken down into the following parts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Asset controllers to get asset information</p>
+</li>
+<li>
+<p>Dashboard controller to get dashboard related summed up information</p>
+</li>
+<li>
+<p>Registry controller to fetch assets from the digital twin registry</p>
+</li>
+<li>
+<p>Notification controller to get notification information and create EDC notification offers</p>
+</li>
+<li>
+<p>Submodel controller for providing asset data functionality</p>
+</li>
+<li>
+<p>Import controller for importing Trace-X data for data provisioning</p>
+</li>
+<li>
+<p>Contract controller to get information about contract agreements</p>
+</li>
+<li>
+<p>EDC controller to retrieve notifications</p>
+</li>
+<li>
+<p>IRS callback controller to retrieve asynchronous jobs completed by IRS</p>
+</li>
+<li>
+<p>Policy controller to retrieve information about policies</p>
+</li>
+<li>
+<p>BPN controller to retrieve information about business partners</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The backend does a request to the digital twin registry utilizing the registry controller. Extracted data from the response is made available through the asset controller and the dashboard controller to the frontend.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_block_view">Building block view</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_blackbox_overall_system">Blackbox overall system</h3>
+<div class="sect3">
+<h4 id="_component_diagram">Component diagram</h4>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/whitebox-overview.svg" alt="whitebox overview" width="781" height="770">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_component_description">Component description</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Components</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The IRS consumes relationship information across the CX-network and builds the graph view. Within this documentation, the focus lies on the IRS.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EDC consumer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The EDC consumer component is there to fulfill the GAIA-X and IDSA-data sovereignty principles. The EDC consumer consists out of a control plane and a data plane.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EDC provider</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The EDC provider component connects with EDC consumer component and forms the endpoint for the actual exchange of data. It handles automatic contract negotiation and the subsequent exchange of data assets for connected applications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Submodel server</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The submodel server offers endpoints for requesting the submodel aspects.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_level_1">Level 1</h3>
+<div class="sect3">
+<h4 id="_component_diagram_2">Component diagram</h4>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/level-1.svg" alt="level 1" width="876" height="663">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_component_description_2">Component description</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Components</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Trace-X</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Trace-X</strong> is a system allowing the user to review the parts/assets catalogue, start a quality investigations and receive quality alerts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Trace-X API</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>Trace-X API</strong> is the interface over which the data consumer is communicating.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>AssetsController</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>AssetsController</strong> provides a REST interface for retrieving the parts/assets information.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>DashboardController</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>DashboardController</strong> provides a REST interface for retrieving overall statistics displayed on a dashboard screen.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>RegistryController</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>RegistryController</strong> provides a REST interface for retrieving the data from parts registry.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>ImportController</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>ImportController</strong> provides a REST interface for importing assets and publishing them in the Catena-X network.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>AssetRepository</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>AssetRepository</strong> is a component responsible for storing and getting assets from database.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>BPNRepository</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>BPNRepository</strong> is a component which stores BPN &#8594; company name mappings.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>NotificationsRepository</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>NotificationsRepository</strong> is a component responsible for storing and holding status of sent/received notifications.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Database</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <strong>database</strong> is a place for storing assets, relations as well as sent/received notifications.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_runtime_view">Runtime view</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes the different functionalities of Trace-X application.</p>
+</div>
+<div class="sect2">
+<h3 id="_assets">Assets</h3>
+<div class="sect3">
+<h4 id="_scenario_1_return_assets">Scenario 1: Return assets</h4>
+<div class="paragraph">
+<p>This section describes what happens when user lists stored assets.
+In this example, the user requests as built assets.
+The same can be done with as planned assets.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/return-all-assets.svg" alt="return all assets" width="1180" height="542">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_overview">Overview</h5>
+<div class="paragraph">
+<p>When a user requests stored assets, Trace-X checks if the user has an adequate role ('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_USER').
+If yes, then the endpoint returns a pageable result of assets.</p>
+</div>
+<div class="paragraph">
+<p>The returned pageable result can be empty if no suitable asset has been found.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_scenario_2_return_specific_assets">Scenario 2: Return specific assets</h4>
+<div class="paragraph">
+<p>This section describes what happens when user searches for a specific asset.
+This example shows the request of one as built asset.
+The same can be done with as planned assets.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/return-specific-assets.svg" alt="return specific assets" width="1309" height="542">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_overview_2">Overview</h5>
+<div class="paragraph">
+<p>When a user requests a specific asset, Trace-X checks if the user has an adequate role ('ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_USER'). If yes, then the endpoint returns a precise asset for the given assetId, if it is found.</p>
+</div>
+<div class="paragraph">
+<p>If no asset has been found for the given ID, an AssetNotFoundException is thrown.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_notifications">Notifications</h3>
+<div class="sect3">
+<h4 id="_receive_quality_notification">Receive quality notification</h4>
+<div class="paragraph">
+<p>This sequence diagram describes the process of receiving a quality notification from another traceability partner.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/business-context_quality-investigation.svg" alt="business context quality investigation" width="1990" height="1699">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_overview_3">Overview</h5>
+<div class="paragraph">
+<p>As for the sending of a quality notification also for receiving of a notification EDC is used to push data from a sender to a receiver.
+To enable receiving a notification by a partner you need to</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create notification endpoint for qualitynotifications/receive</p>
+</li>
+<li>
+<p>Create EDC assets</p>
+</li>
+<li>
+<p>Create EDC usage policies</p>
+</li>
+<li>
+<p>Create EDC contract definitions</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Trace-X implements a functionality to create the assets and their corresponding policies in the admin panel.</p>
+</div>
+<div class="paragraph">
+<p>With the notification asset it is possible to enable EDC contract negotiation and EDC data transfer based on access policies defined. Only if the sender is able to find the asset in the catalog offer and perform a successful contract negotiation there will be the possibility to push a notification to the specified http endpoint on the receiver side.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_send_quality_notification">Send quality notification</h4>
+<div class="paragraph">
+<p>This sequence diagram describes the process of sending a quality notification between traceability applications.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/business-context_quality-investigation_send.svg" alt="business context quality investigation send" width="1660" height="1761">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_overview_4">Overview</h5>
+<div class="paragraph">
+<p>For the notification feature EDC is used to push data from a sender to a receiver.
+To enable sending respective more precisely receiving a notification by a partner you need to</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create notification endpoint for qualitynotifications/receive</p>
+</li>
+<li>
+<p>Create EDC assets</p>
+</li>
+<li>
+<p>Create EDC usage policies</p>
+</li>
+<li>
+<p>Create EDC contract definitions</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Trace-X implements a functionality to create the assets and their corresponding policies in the admin panel. With the notification asset it is possible to enable EDC contract negotiation and EDC data transfer process so that the quality investigation can be pushed by the sender.</p>
+</div>
+<div class="paragraph">
+<p>In the above UML sequence diagram the sending of quality notifications from Trace-X to a receiver (any other traceability application) is described.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_consumption">Data consumption</h3>
+<div class="paragraph">
+<p>This sequence diagram describes the process of fetching data from a DTR and the Catena-X ecosystem.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/business-context_data_consumption.svg" alt="business context data consumption" width="849" height="789">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_overview_5">Overview</h4>
+<div class="paragraph">
+<p>Data is fetched by a Trace-X instance using Digital Twin Registry (DTR), Item Relationship Service (IRS) and Trace-X consumer EDC.
+For digital twins the Asset Administration Shell (AAS) standard is used. For fetching data with Trace-X, a Digital Twin Registry and an IRS instance are required. Data should represent parts, supplier and customer parts, parts tree / parts relations.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_provisioning">Data Provisioning</h3>
+<div class="paragraph">
+<p>This sequence diagrams describes the process of importing data from a Trace-X dataformat</p>
+</div>
+<div class="sect3">
+<h4 id="_module_1">Module 1</h4>
+<div class="paragraph">
+<p>Data will be imported by the Trace-X frontend into the Trace-X backend and will be persisted as an asset in a transient state.
+The raw data which is needed for the shared services (DTR / EDC) will be persisted as well.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/business-context_data_provisioning_1.svg" alt="business context data provisioning 1" width="707" height="612">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_module_2">Module 2</h4>
+<div class="paragraph">
+<p>The frontend is able to select assets and publish / synchronize them with the shared services. DTR / EDC / submodel API.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/business-context_data_provisioning_2.svg" alt="business context data provisioning 2" width="751" height="490">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_module_3">Module 3</h4>
+<div class="paragraph">
+<p>The backend is able to persist the data in the DTR / EDC and allows to use IRS for resolving assets.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/business-context_data_provisioning_3.svg" alt="business context data provisioning 3" width="710" height="843">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_scenario_1_receive_import_report">Scenario 1: Receive import report</h4>
+<div class="paragraph">
+<p>This section describes what happens when the user wants to get a report of the imported assets associated to a importJobId.
+In this example, the user requests an import report.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/import-report-receive.svg" alt="import report receive" width="1732" height="542">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_overview_6">Overview</h5>
+<div class="paragraph">
+<p>When a user requests an import report, Trace-X checks if the user has an adequate role ('ROLE_ADMIN', 'ROLE_SUPERVISOR').
+If yes, then the endpoint returns an import report to the given importJobId.</p>
+</div>
+<div class="paragraph">
+<p>If the importJobId is not known to Trace-X, an HTTP 404 error is returned.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_scenario_2_publish_assets">Scenario 2: Publish assets</h4>
+<div class="paragraph">
+<p>This section describes user interaction when publishing assets</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/publish-assets.svg" alt="publish assets" width="425" height="299">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_overview_7">Overview</h5>
+<div class="paragraph">
+<p>When a user publishes assets, Trace-X checks if the user has an adequate role ('ROLE_ADMIN').
+If yes, then the endpoint starts to publish assets to network.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_scenario_3_publish_assets_error_on_edc_or_dtr">Scenario 3: Publish assets - error on EDC or DTR</h4>
+<div class="paragraph">
+<p>This section describes user interaction when publishing assets fails due to EDC or DTR error (for example when the services are unavailable).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/publish-assets-error.svg" alt="publish assets error" width="680" height="413">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_overview_8">Overview</h5>
+<div class="paragraph">
+<p>When a user publishes assets, Trace-X checks if the user has an adequate role ('ROLE_ADMIN').
+If yes, then the endpoint starts to publish assets to network.
+If any of required services are not available or return an error response upon executing, flow assets are set to ERROR state and the user can retry publishing them at any time when services are available again.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_sovereignty">Data sovereignty</h3>
+<div class="sect3">
+<h4 id="_scenario_1_return_asset_contract_agreements">Scenario 1: Return asset contract agreements</h4>
+<div class="paragraph">
+<p>This section describes functionality and the behavior in case a user requests contract agreements from Trace-X via the Trace-X contracts API (/contracts).</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/return-all-contracts.svg" alt="return all contracts" width="1105" height="554">
+</div>
+</div>
+<div class="sect4">
+<h5 id="_overview_9">Overview</h5>
+<div class="paragraph">
+<p>In case a user requests contract agreements, Trace-X checks if the user has required roles ('ROLE_ADMIN', 'ROLE_SUPERVISOR').
+If yes, then the requested assets will be mapped to the related contract agreement id.
+These contract agreement ids will be then requested on EDC side via POST (/management/v2/contractagreements/request) and GET (/management/v2/contractagreements/{ContractAgreementId}/negotiation) to get the relevant information.</p>
+</div>
+<div class="paragraph">
+<p>The contract information is then returned by the endpoint as a pageable result.</p>
+</div>
+<div class="paragraph">
+<p>If no asset ids are provided in the request, 50 contract agreement ids are handled by default.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_policies">Policies</h3>
+<div class="sect3">
+<h4 id="_overview_10">Overview</h4>
+<div class="sect4">
+<h5 id="_scenario_1_startup_interaction_with_the_irs_policy_store">Scenario 1: Startup interaction with the IRS policy store</h5>
+<div class="paragraph">
+<p>The Trace-X instance defines a constraint which is required for data consumption and provisioning.
+Trace-X retrieves all policies by IRS and validates if one of the policies contains the required constraint given by Trace-X.
+If a policy with the constraint exists and is valid, the process ends. If the policy is not valid, it will create one with the given constraint.</p>
+</div>
+<div class="paragraph">
+<p>This sequence diagram describes the process of retrieving or creating policies within the IRS policy store based on the constraint given by Trace-X.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/policy-startup-configuration.svg" alt="policy startup configuration" width="513" height="392">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_scenario_2_startup_interaction_with_edc">Scenario 2: Startup interaction with EDC</h5>
+<div class="paragraph">
+<p>The Trace-X instance uses the policy which includes the defined constraint and transforms it into a valid EDC policy request.
+The EDC policy request will be used for creating a policy for the required notification contracts.</p>
+</div>
+<div class="paragraph">
+<p>This sequence diagram describes the process of retrieving the correct policy by IRS policy store based on the constraint given by Trace-X and reuses it for creating an EDC policy.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/policy-startup-notification-contract.svg" alt="policy startup notification contract" width="499" height="418">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_scenario_3_provisioning_of_notifications">Scenario 3: Provisioning of notifications</h5>
+<div class="paragraph">
+<p>The Trace-X instance uses the policy which includes the defined constraint and reuses it for validation of catalog offers by the receiver EDC.</p>
+</div>
+<div class="paragraph">
+<p>This sequence diagram describes the process of how the policy with the defined constraint will be used for validation of the catalog offers from the receiver EDC.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/policy-notifications.svg" alt="policy notifications" width="1205" height="1134">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_scenario_4_provisioning_of_assets">Scenario 4: Provisioning of assets</h5>
+<div class="paragraph">
+<p>The Trace-X instance uses the policy which includes the defined constraint and reuses it for creating EDC assets.</p>
+</div>
+<div class="paragraph">
+<p>This sequence diagram describes the process of how the policy with the defined constraint will be reused for registering EDC data assets.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/policy-assets.svg" alt="policy assets" width="518" height="271">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_scheduler">Scheduler</h3>
+<div class="paragraph">
+<p>An overview of the scheduler tasks configured in the system.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Scheduler name</th>
+<th class="tableblock halign-left valign-top">Execution interval</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PublishAssetsJob</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every hour at 30min</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Publishes assets in IN_SYNCHRONIZATION state to core services. The process combines 'as-built' and 'as-planned' assets and initiates their publication for synchronization in the traceability system.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AssetsRefreshJob</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Every 2 hours</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invokes the synchronization of asset shell descriptors with the decentralized registry. It ensures the latest asset information is fetched and updated in the system from external sources.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deployment_view">Deployment view</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cross_cutting_concepts">Cross-cutting concepts</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_entity_relationship_model">Entity-relationship model</h3>
+<div class="paragraph">
+<p>Please be informed that the 'as-planned' version currently lacks the database relations. However, kindly maintain the Entity-relationship model (ERM) in its current state.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/diag-plantuml-md5-02e8c16ca5bc38a04ad201ff718a283f.svg" alt="Diagram" width="2033" height="1160">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_domain_concepts">Domain concepts</h3>
+<div class="sect3">
+<h4 id="_api_model">API model</h4>
+<div class="paragraph">
+<p>For detailed information about the API model, please refer to the <a href="https://catenax-ng.github.io/tx-traceability-foss/docs/api-specification/api-specification.html">API specification</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_domain_models">Domain models</h4>
+<div class="sect4">
+<h5 id="_assets_2">Assets</h5>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/level-1.svg" alt="level 1" width="1623" height="1827">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_quality_notifications">Quality notifications</h5>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/level-2.svg" alt="level 2" width="1641" height="680">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_safety_and_security_concepts">Safety and security concepts</h3>
+<div class="sect3">
+<h4 id="_authentication_authorization">Authentication / authorization</h4>
+<div class="sect4">
+<h5 id="_trace_x_api_2">Trace-X API</h5>
+<div class="paragraph">
+<p>The Trace-X API is secured using OAuth2.0 / Open ID Connect.
+Every request to the Trace-X API requires a valid bearer token.
+The JWT token should also contain two claims:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>'bpn' which is equal to the configuration value from <code>API_ALLOWED_BPN</code> property</p>
+</li>
+<li>
+<p>'resource_access' with the specific key for C-X environments.
+The list of values will be converted to roles by Trace-X.
+Currently, Trace-X API handles three roles: <strong>'User'</strong> and <strong>'Supervisor'</strong> and <strong>'Admin'.</strong></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can have a look at the <a href="https://github.com/eclipse-tractusx/traceability-foss/blob/main/docs/src/docs/administration/system-overview.adoc#rights-and-role-matrix-of-trace-x">rights and role matrix</a> in the system overview of the administration guide.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_trace_x_as_edc_client">Trace-X as EDC client</h5>
+<div class="paragraph">
+<p>The Trace-X accesses the Catena-X network via the EDC consumer connector.
+This component requires authentication via a Verifiable Credential (VC), which is provided to the EDC via the managed identity wallet.</p>
+</div>
+<div class="paragraph">
+<p>The VC identifies and authenticates the EDC and is used to acquire access permissions for the data transferred via EDC.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_credentials">Credentials</h4>
+<div class="paragraph">
+<p>Credentials must never be stored in Git!</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_architecture_and_design_patterns">Architecture and design patterns</h3>
+<div class="sect3">
+<h4 id="_module_package_structure">Module / package structure</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Main domain name</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Application</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Optional: subdomain name (in case of inheritance) → following same structure as main domain</p>
+</li>
+<li>
+<p>Mapper: holds the mapper of transforming domain models to response models</p>
+</li>
+<li>
+<p>Service: holds the interface for implementation in the domain package</p>
+</li>
+<li>
+<p>REST: holds the controller for providing the api for the domain</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Domain</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Optional: subdomain name (in case of inheritance)</p>
+</li>
+<li>
+<p>Model: holds the domain model</p>
+</li>
+<li>
+<p>Service: implementation of the interface provided in the application package</p>
+</li>
+<li>
+<p>Repository: holds the interface for accessing the infrastructure package</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Infrastructure</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Optional: subdomain name (in case of inheritance)</p>
+</li>
+<li>
+<p>Model: holds the technical entities</p>
+</li>
+<li>
+<p>Repository: holds the data access layer</p>
+<div class="ulist">
+<ul>
+<li>
+<p>E.g. JPARepository / Impl</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>All models (request / response) used in the API should be saved in the tx-model project.
+To be reusable for cucumber testing.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_under_the_hood_concepts">"Under-the-hood" concepts</h3>
+<div class="sect3">
+<h4 id="_exception_and_error_handling">Exception and error handling</h4>
+<div class="paragraph">
+<p>There are two types of potential errors in Trace-X:</p>
+</div>
+<div class="sect4">
+<h5 id="_technical_errors">Technical errors</h5>
+<div class="paragraph">
+<p>Technical errors occur when there is a problem with the application itself, its configuration or directly connected infrastructure, e.g. the Postgres database.
+Usually, the application cannot solve these problems by itself and requires some external support (manual work or automated recovery mechanisms, e.g. Kubernetes liveness probes).</p>
+</div>
+<div class="paragraph">
+<p>These errors are printed mainly to the application log and are relevant for the health-checks.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_functional_errors">Functional errors</h5>
+<div class="paragraph">
+<p>Functional errors occur when there is a problem with the data that is being processed or external systems are unavailable and data cannot be sent / fetched as required for the process.
+While the system might not be able to provide the required function at that moment, it may work with a different dataset or as soon as the external systems recover.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_rules_for_exception_handling">Rules for exception handling</h5>
+<div class="sect5">
+<h6 id="_throw_or_log_dont_do_both">Throw or log, don&#8217;t do both</h6>
+<div class="paragraph">
+<p>When catching an exception, either log the exception and handle the problem or rethrow it, so it can be handled at a higher level of the code.
+By doing both, an exception might be written to the log multiple times, which can be confusing.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_write_own_base_exceptions_for_internal_interfaces">Write own base exceptions for (internal) interfaces</h6>
+<div class="paragraph">
+<p>By defining a common (checked) base exception for an interface, the caller is forced to handle potential errors, but can keep the logic simple.
+On the other hand, you still have the possibility to derive various, meaningful exceptions for different error cases, which can then be thrown via the API.</p>
+</div>
+<div class="paragraph">
+<p>Of course, when using only RuntimeExceptions, this is not necessary - but those can be overlooked quite easily, so be careful there.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_central_fallback_exception_handler">Central fallback exception handler</h6>
+<div class="paragraph">
+<p>There will always be some exception that cannot be handled inside the code correctly - or it may just have been unforeseen.
+A central fallback exception handler is required so all problems are visible in the log and the API always returns meaningful responses.
+In some cases, this is as simple as a HTTP 500.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_dont_expose_too_much_exception_details_over_api">Dont expose too much exception details over API</h6>
+<div class="paragraph">
+<p>It&#8217;s good to inform the user, why their request did not work, but only if they can do something about it (HTTP 4xx).
+So in case of application problems, you should not expose details of the problem to the caller.
+This way, we avoid opening potential attack vectors.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_development_concepts">Development concepts</h3>
+<div class="sect3">
+<h4 id="_build_test_deploy">Build, test, deploy</h4>
+<div class="paragraph">
+<p>Trace-X is built using Maven and utilizes all the standard concepts of it.
+Test execution is part of the build process and a minimum test coverage of 80% is enforced.</p>
+</div>
+<div class="paragraph">
+<p>The project setup contains a multi-module Maven build.
+Commonly used classes (like the Trace-X data model) should be extracted into a separate submodule and reused across the project.
+However, this is not a "one-size-fits-all" solution.
+New submodules should be created with care and require a review by the team.</p>
+</div>
+<div class="paragraph">
+<p>The Maven build alone only leads up to the JAR artifact of Trace-X.
+To create Docker images, the Docker build feature is used.
+This copies all resources into a builder image, builds the software and creates a final Docker image at the end that can then be deployed.</p>
+</div>
+<div class="paragraph">
+<p>Although the Docker image can be deployed in various ways, the standard solution are the provided Helm charts, which describe the required components as well.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_code_generation">Code generation</h4>
+<div class="paragraph">
+<p>There are two methods of code generation in Trace-X:</p>
+</div>
+<div class="sect4">
+<h5 id="_lombok">Lombok</h5>
+<div class="paragraph">
+<p>The Lombok library is heavily used to generate boilerplate code (like constructors, getters, setters, builders&#8230;&#8203;).
+This way, code can be written faster and this boilerplate code is excluded from test coverage, which keeps the test base lean.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_swagger_openapi">Swagger / OpenAPI</h5>
+<div class="paragraph">
+<p>The API uses OpenAPI annotations to describe the endpoints with all necessary information.
+The annotations are then used to automatically generate the OpenAPI specification file, which can be viewed in the Swagger UI that is deployed with the application.</p>
+</div>
+<div class="paragraph">
+<p>The generated OpenAPI specification file is automatically compared to a fixed, stored version of it to avoid unwanted changes of the API.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_migration">Migration</h4>
+<div class="paragraph">
+<p>Data migration is handled by flyway.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_configurability">Configurability</h4>
+<div class="paragraph">
+<p>Trace-X utilizes the configuration mechanism provided by Spring Boot.
+Configuration properties can be defined in the file <code>src/main/resources/application.yml</code></p>
+</div>
+<div class="paragraph">
+<p>Other profiles should be avoided.
+Instead, the configuration can be overwritten using Spring&#8217;s external configuration mechanism (see <a href="https://docs.spring.io/spring-boot/docs/2.1.9.RELEASE/reference/html/boot-features-external-config.html" class="bare">https://docs.spring.io/spring-boot/docs/2.1.9.RELEASE/reference/html/boot-features-external-config.html</a>).
+The operator must have total control over the configuration of Trace-X.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_java_style_guide">Java style guide</h4>
+<div class="paragraph">
+<p>We generally follow the <a href="https://google.github.io/styleguide/javaguide.html">Google Java Style Guide</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_api_guide">API guide</h4>
+<div class="paragraph">
+<p>We generally follow the <a href="https://swagger.io/specification/">OpenAPI Specification</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_docomentation_style_guide">Docomentation style guide</h4>
+<div class="paragraph">
+<p>We generally follow the <a href="https://developers.google.com/style">Google developer documentation style guide</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_unit_and_functional_testing">Unit and functional testing</h4>
+<div class="sect4">
+<h5 id="_general_unit_testing">General unit testing</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Code coverage &gt;= 80%</p>
+</li>
+<li>
+<p>Writing methods which provide a response to be better testable (avoid void if feasible).</p>
+</li>
+<li>
+<p>Naming of unit tests are as follows:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/unit_test_naming.png" alt="unit test naming">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use given/when/then pattern for unit test structuring.
+E.g:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/given_when_then_pattern.png" alt="given when then pattern">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_integration_testing">Integration testing</h5>
+<div class="paragraph">
+<p>Each public API should have at least two integration tests (positive / negative).
+For integration testing, the <code>tx-backend/src/main/resources/application-integration.yml</code> is used.
+Additionally, you need to have a local Docker environment running.
+For this, we recommend <a href="https://rancherdesktop.io/">Rancher Dektop</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_clean_code">Clean code</h4>
+<div class="paragraph">
+<p>We follow the rules and behaviour of: <a href="https://clean-code-developer.com/" class="bare">https://clean-code-developer.com/</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_secure_coding_standards">Secure coding standards</h4>
+<div class="paragraph">
+<p>As there is no other guideline of C-X, we fix any vulnerabilities, exposures, flaw detected by one of our SAST, DAST, Pentesting tools which is higher than "Very Low".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/vulnerability_level.png" alt="vulnerability level">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_trace_x_technical_class_responsibilities">Trace-X technical class responsibilities</h4>
+<div class="sect4">
+<h5 id="_controller">Controller</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Has only one dependency to a facade or a service or a validator annotation</p>
+</li>
+<li>
+<p>Has no own logic</p>
+</li>
+<li>
+<p>Includes the swagger documentation annotations</p>
+</li>
+<li>
+<p>Has an integration test class</p>
+</li>
+<li>
+<p>Uses a static mapper to transform a domain model into the response model</p>
+</li>
+<li>
+<p>Returns a ResponseEntity&lt;T&gt;</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_response_object">Response object</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Should be a public version of the domain object</p>
+</li>
+<li>
+<p>Is a result of the transformation which will be done in the facade</p>
+</li>
+<li>
+<p>Is not necessary if the domain object can be fully public</p>
+</li>
+<li>
+<p>Is not allowed to be implemented in a repository or a DAO</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_facade">Facade</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Should have multiple service classes injected</p>
+</li>
+<li>
+<p>Can be implemented in a controller</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_serviceimpl">ServiceImpl</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Responsible for retrieving data from storage</p>
+</li>
+<li>
+<p>Performs business logic</p>
+</li>
+<li>
+<p>Can be a http client</p>
+</li>
+<li>
+<p>Returns a jpaEntity → domain object</p>
+</li>
+<li>
+<p>Should only be implemented in a controller through an interface</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_repository">Repository</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Represents an interface to the underlying repository implementation which then uses the spring repository</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_domain_object">Domain object</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Mapped from an entity or from received external data</p>
+</li>
+<li>
+<p>Will be used as a working model until it will finally be transformed to a response object or another domain which will be persisted later on</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_config_object">Config object</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Should have the suffix .config at the end of the class</p>
+</li>
+<li>
+<p>Includes beans which are automatically created by app startup</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_constructing_objects">Constructing objects</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Using builder pattern</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Currently, we are using the constructor to create objects in our application.
+Main reason is to provide immutable objects.</p>
+</li>
+<li>
+<p>As the handling with big loaded constructors is not easy and error prone, it&#8217;s recommended to use the builder pattern to have a clear understanding about what we are creating at the point of implementation.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Using lombok for annotation processing</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_operational_concepts">Operational concepts</h3>
+<div class="sect3">
+<h4 id="_administration">Administration</h4>
+<div class="sect4">
+<h5 id="_configuration">Configuration</h5>
+<div class="paragraph">
+<p>Trace-X can be configured using two mechanisms:</p>
+</div>
+<div class="sect5">
+<h6 id="_application_yml">application.yml</h6>
+<div class="paragraph">
+<p>If you build Trace-X yourself, you can modify the application.yml config that is shipped with Trace-X.
+This file contains all possible config entries for the application.
+Once the Docker image has been built, these values can only be overwritten using the Spring external config mechanism (see <a href="https://docs.spring.io/spring-boot/docs/2.1.9.RELEASE/reference/html/boot-features-external-config.html" class="bare">https://docs.spring.io/spring-boot/docs/2.1.9.RELEASE/reference/html/boot-features-external-config.html</a>), e.g. by mounting a config file in the right path or using environment variables.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_helm_chart">Helm chart</h6>
+<div class="paragraph">
+<p>The most relevant config properties are exposed as environment variables and must be set in the Helm chart for the application to be able to run.
+Check the Trace-X Helm chart in Git for all available variables.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_scaling">Scaling</h4>
+<div class="paragraph">
+<p>If the number of consumers rises, Trace-X can be scaled up by using more resources for the deployment pod.
+Those resources can be used to utilize more parallel threads to handle job execution.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_clustering">Clustering</h4>
+<div class="paragraph">
+<p>Trace-X can run in clustered mode, as each running job is only present in one pod at a time.
+Note: as soon as a resume feature is implemented, this needs to be addressed here.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_logging">Logging</h4>
+<div class="paragraph">
+<p>Logs are being written directly to stdout and are picked up by the cluster management.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_monitoring">Monitoring</h4>
+<div class="paragraph">
+<p>Currently, there is on monitoring supported in Trace-X.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_experience">User experience</h3>
+<div class="sect3">
+<h4 id="_user_interface">User interface</h4>
+<div class="sect4">
+<h5 id="_table_design">Table design</h5>
+<div class="paragraph">
+<p>Trace-X uses the following table design to build consistent and user-friendly tables:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-design.png" alt="table design">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Actions</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Black icons</p>
+</li>
+<li>
+<p>When an action cannot be executed for any reason, the icon turns grey</p>
+</li>
+<li>
+<p>A tooltip is shown when hovering over an executable action to describe it</p>
+</li>
+<li>
+<p>A tooltip is shown when hovering over a disabled action to describe the reason why it can&#8217;t be executed</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-actions.png" alt="table actions"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Action menus</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Opens when clicking on a three-dot menu</p>
+</li>
+<li>
+<p>Disappears, when clicking anywhere outside the menu</p>
+</li>
+<li>
+<p>List of action icons with text labels</p>
+</li>
+<li>
+<p>The three-dot menu is sticky when used inside the table for single-item actions</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-action-menus.png" alt="table action menus"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multi-select box</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Clicking on it when no items are selected, selects all items on the current page</p>
+</li>
+<li>
+<p>Clicking on it when some items are selected (but not all), selects all items on the current page</p>
+</li>
+<li>
+<p>Clicking on it when all items are selected, deselects all items on the current page</p>
+</li>
+<li>
+<p>Clicking on the small arrow opens a menu for clearing the page selection or the entire selection</p>
+</li>
+<li>
+<p>The menu disappears, when clicking anywhere outside the menu</p>
+</li>
+<li>
+<p>Part of the column header row &#8594; Sticky on top next to column headers</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-multi-select-box.png" alt="table multi select box"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selection box</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Clicking on it toggles item selection</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selection count</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Shows selection count of the current page</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Column header</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Shows the column title</p>
+</li>
+<li>
+<p>Hovering over it shows a tooltip that describes sorting behaviour</p>
+</li>
+<li>
+<p>Clicking on it toggles sorting</p>
+</li>
+<li>
+<p>Sticky on top</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-sorting-tooltip.png" alt="table sorting tooltip"></span>
+Ascending sorting: <span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-sorting-ascending.png" alt="table sorting ascending"></span>
+Descending sorting: <span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-sorting-descending.png" alt="table sorting descending"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Filter</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Can search for any string</p>
+</li>
+<li>
+<p>Results are shown directly without having to press enter</p>
+</li>
+<li>
+<p>Results are shown as a sorted list (ascending)</p>
+</li>
+<li>
+<p>Selected results are shown on top of unselected ones</p>
+</li>
+<li>
+<p>The checkbox inside the search field selects or deselects every result</p>
+</li>
+<li>
+<p>The cross inside the search field resets the search and the filter</p>
+</li>
+<li>
+<p>When the filter is active, 'All' changes to the filtered value (+ the number of other filters)</p>
+</li>
+<li>
+<p>For date values, the search is replaced with a date picker</p>
+</li>
+<li>
+<p>Sticky on top below column headers</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-filter.png" alt="table filter"></span>
+Date filter: <span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-filter-date.png" alt="table filter date"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quick filter</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Used to quickly filter for specific values</p>
+</li>
+<li>
+<p>Independent of regular filters</p>
+</li>
+<li>
+<p>Work exclusively - only one filter can be selected at a time</p>
+</li>
+<li>
+<p>Click on the currently active quick filter to deactivate it</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Table column settings</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Opens up as an overlay</p>
+</li>
+<li>
+<p>Clicking on Save, the cross or anywhere outside the overlay will close the overlay (only saving changes when clicking Save)</p>
+</li>
+<li>
+<p>Selecting/deselecting columns makes them visible/invisible in the table</p>
+</li>
+<li>
+<p>The order of the columns can be changed by selecting the column title and using the arrow buttons</p>
+</li>
+<li>
+<p>Using the circle arrow icon resets the column visibility and column order</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-column-settings.png" alt="table column settings"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Full-width toggle</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Used to switch between full-width mode or variable-width mode</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scrollbars</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Only visible/active when data exceeds the visible space</p>
+</li>
+<li>
+<p>Sticky elements stay visible regardless of scroll position</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page size selector</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Shows the currently selected page size</p>
+</li>
+<li>
+<p>When clicking on it, a dropdown opens that shows available page size options</p>
+</li>
+<li>
+<p>Clicking any option will select that option and close the dropdown</p>
+</li>
+<li>
+<p>Clicking anywhere outside the dropdown closes the dropdown without applying any changes</p>
+</li>
+<li>
+<p>Three options are always available</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-page-size-selector.png" alt="table page size selector"></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page information</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Shows information about the amount of items on the current page and the total amount of items</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Page controls</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Used to switch between pages</p>
+</li>
+<li>
+<p>Controls are: First page, previous page, next page, last page</p>
+</li>
+<li>
+<p>Hovering over the controls shows a tooltip that labels each control</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="image"><img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-page-controls.png" alt="table page controls"></span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In addition, following tables are used within Trace-X:</p>
+</div>
+<div class="paragraph">
+<p>When the data is not as complex and/or extensive and single-item actions are not needed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-small.png" alt="table small">
+</div>
+</div>
+<div class="paragraph">
+<p>When data must only be shown and no actions are needed:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://raw.githubusercontent.com/eclipse-tractusx/traceability-foss/main/docs/src/images/arc42/cross-cutting/user-experience/table-data-only.png" alt="table data only">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quality_requirements">Quality requirements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section includes concrete quality scenarios to better capture the key quality objectives but also other required quality attributes.</p>
+</div>
+<div class="sect2">
+<h3 id="_quality_tree">Quality tree</h3>
+<div class="paragraph">
+<p>The tree structure provides an overview for a sometimes large number of quality requirements.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="architecture-constraints/business-context-2.svg" alt="business context 2" width="535" height="272">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_quality_scenarios">Quality scenarios</h3>
+<div class="paragraph">
+<p>The initial letters of the scenario identifiers (IDs) in the following table each stand for the higher-level quality characteristic. For example M for maintainability. These identifiers are also used in the quality tree. The scenarios cannot always be clearly assigned to a characteristic. Therefore, they sometimes appear more than once in the quality tree.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ID</th>
+<th class="tableblock halign-left valign-top">Scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A developer with basic knowledge of the traceability use case looks for an introduction to the traceability architecture. He or she gets the idea of essential design very fast.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M02</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A senior developer looks for a reference implementation of the traceability use case functionalities. He or she gets it within the source code.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M03</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A developer wants to implement new features. He or she is able to add it to the source code easily.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M04</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A developer wants to implement a new frontend or change some components. The efforts can be reduced by using the standardized API endpoints to do so.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">I01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user wants to switch from FOSS application to a COTS application or the other way round. This is possible since the application is interoperable with other applications within the CX network.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application uses the Catena-X standards to ensure the correct interoperability and exchange with other participants.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F02</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An OEM or tier n supplier needs more information regarding specific parts. He can mark the parts in question and send a top-down notification (quality investigation) to the next entity / the partner.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F03</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A company wants to have more transparency and a visualized status of the supply / value chain. By using the application they are enabled to work with the structures and enable new features / functionalities.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F04</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notifications are sent using the EDC to ensure interoperability and reliability to the CX network.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Notifications between traceability apps need to be send out and received within a specified timeframe to minimize the negative impact of e.g. recalled serialized products/batches on the value chain.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_glossary">Glossary</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Term</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aspect</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Collection of various aspects from the digital twin. An aspect can, for example, bundle all information about a specific part.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AAS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>A</strong>sset <strong>A</strong>dministration <strong>S</strong>hell (Industry 4.0) is the implementation of the digital twin for Industry 4.0 and enables interoperability between different companies.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BoM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>B</strong>ill <strong>o</strong>f <strong>M</strong>aterial. BoM is a list of parts and materials that a product contains. Without them, manufacturing would not be possible.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BoM AsBuilt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bill of material lifecycle of the built entity</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BoM AsPlanned</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bill of material lifecycle of the planned entity</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BPN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>B</strong>usiness <strong>P</strong>artner <strong>N</strong>umber. A BPN is used to identify a partner in the Catena-X network.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abbreviation for Catena-X</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data Sovereignty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ability to keep control over own data, that is shared with other participants</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EDC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>E</strong>clipse <strong>D</strong>ataspace <strong>C</strong>onnector. The connector version used in Catena-X</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FOSS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>F</strong>ree and <strong>O</strong>pen <strong>S</strong>ource <strong>S</strong>oftware</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interoperability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Communication and interaction with other components or Catena-X partners/players</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IRS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>I</strong>tem <strong>R</strong>elationship <strong>S</strong>ervice. Component to provide data chains. <a href="https://eclipse-tractusx.github.io/item-relationship-service/docs/arc42/">IRS architecture documentation (arc42)</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>S</strong>mall / <strong>M</strong>edium <strong>E</strong>nterprise</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trace-X</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Proper name of open-source software application of Catena-X use case traceability</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>U</strong>ser <strong>I</strong>nterface</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2024-06-28 13:26:02 UTC
+</div>
+</div>
+</body>
+</html>
